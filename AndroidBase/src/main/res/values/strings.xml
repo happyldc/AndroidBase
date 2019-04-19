@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Base</string>
+
+    <string name="title_activity_crash">CrashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <!--异常日志详情-->
+    <string name="exception_detail_title">%1$s崩溃日志</string>
+    <string name="exception_detail_toast_copy_sucs">错误详情已复制到剪贴板</string>
+    <string name="load_failed">加载失败，点击重试</string>
+    <string name="loading">加载中...</string>
+    <string name="load_failed_no_network">加载失败，网络未连接！</string>
+    <string name="empty">这里啥都没有</string>
+    <string name="str_none"/>
+</resources>

@@ -1,0 +1,51 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven' // 增加
+group = 'com.github.happyldc'
+android {
+    compileSdkVersion 26
+
+
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support:design:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+
+    api 'com.github.happyldc:ActivityOnResultHelper:1.0.0'
+    api ('com.github.happyldc:AndroidUtils:1.0.0')
+    api 'com.billy.android:gloading:1.0.0'
+    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.46'
+    api 'com.github.happyldc:PermissionHelper:1.0.1'
+    api 'com.yanzhenjie:kalle:0.1.5'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+
+    api 'com.android.support:recyclerview-v7:26.1.0'
+    //api 'com.jcodecraeer:xrecyclerview:1.5.9'
+    api 'com.readystatesoftware.systembartint:systembartint:1.0.3'
+
+
+}
