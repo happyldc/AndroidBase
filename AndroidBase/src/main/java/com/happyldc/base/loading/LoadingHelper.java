@@ -20,11 +20,13 @@ public class LoadingHelper {
     public LoadingHelper(Activity target, Runnable retryRunable) {
         this.target = target;
         this.retryRunable = retryRunable;
+        initLoadingStatusViewIfNeed();
     }
 
     public LoadingHelper(View target, Runnable retryRunable) {
         this.target = target;
         this.retryRunable = retryRunable;
+        initLoadingStatusViewIfNeed();
     }
 
     public Gloading.Holder getHolder() {
