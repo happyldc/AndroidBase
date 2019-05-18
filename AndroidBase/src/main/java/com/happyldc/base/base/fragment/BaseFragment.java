@@ -18,7 +18,7 @@ import com.happyldc.base.loading.LoadingHelper;
 public abstract class BaseFragment extends Fragment {
 
     protected LoadingHelper loadingHelper;
-    private View mContentView;
+    protected View mContentView;
 
     @Nullable
     @Override
@@ -46,7 +46,10 @@ public abstract class BaseFragment extends Fragment {
         return loadingHelper.getHolder().getWrapper();
     }
 
-    protected abstract void initView(View contentView, Bundle savedInstanceState);
+    protected void initView(View contentView, Bundle savedInstanceState) {
+    }
+
+    ;
 
     protected void initLoadingHelper(View targetView) {
         loadingHelper = new LoadingHelper(targetView, new Runnable() {
