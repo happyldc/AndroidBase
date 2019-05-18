@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.happyldc.base.R;
 import com.happyldc.base.loading.LoadingHelper;
 
 /**
@@ -27,14 +28,28 @@ public abstract class BaseFragment extends Fragment {
         if (mContentView == null) {
             throw new RuntimeException("Fragment contentView can not be null");
         }
+        initView(mContentView, savedInstanceState);
         initLoadingHelper(mContentView);
-        setupView(mContentView,savedInstanceState);
 
+        setupView(mContentView, savedInstanceState);
+        mContentView = getContentView();
+        return mContentView;
+    }
+
+    /**
+     * 如果 initLoadingHelper（mContentView） 则返回的View为loadingHelper.getHolder().getWrapper();
+     * 否则返回mcontentView
+     *
+     * @return
+     */
+    protected View getContentView() {
         return loadingHelper.getHolder().getWrapper();
     }
 
-    protected void initLoadingHelper(View contentView) {
-        loadingHelper = new LoadingHelper(mContentView ,new Runnable() {
+    protected abstract void initView(View contentView, Bundle savedInstanceState);
+
+    protected void initLoadingHelper(View targetView) {
+        loadingHelper = new LoadingHelper(targetView, new Runnable() {
             @Override
             public void run() {
                 onRetryLoadClick();

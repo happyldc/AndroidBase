@@ -25,9 +25,11 @@ public abstract class BaseListFragment<T> extends BaseFragment {
     public BaseQuickAdapter<T, BaseViewHolder> getAdapter() {
         return mAdapter;
     }
+
     public RecyclerView getRecyclerView() {
         return mRecyclerView;
     }
+
     @Override
     protected int getLayoutResId() {
 
@@ -36,7 +38,7 @@ public abstract class BaseListFragment<T> extends BaseFragment {
 
     @Override
     protected void setupView(View contentView, Bundle savedInstanceState) {
-        initView(contentView, savedInstanceState);
+
         this.layoutManager = createLayoutManager();
         this.mAdapter = createAdapter();
 
@@ -49,7 +51,8 @@ public abstract class BaseListFragment<T> extends BaseFragment {
 
     public abstract BaseQuickAdapter<T, BaseViewHolder> createAdapter();
 
-    private void initView(View contentView, Bundle savedInstanceState) {
+    @Override
+    public void initView(View contentView, Bundle savedInstanceState) {
         mRecyclerView = contentView.findViewById(R.id.base_recyclerview);
     }
 
@@ -68,7 +71,6 @@ public abstract class BaseListFragment<T> extends BaseFragment {
     public void addData(int index, T data) {
         mAdapter.addData(index, data);
     }
-
 
 
 }
