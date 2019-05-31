@@ -56,7 +56,7 @@ public abstract class BaseMvpFragment<T extends BasePresenter> extends BaseFragm
 
     @Override
     public void showLoadFailure(CharSequence failureMsg) {
-        loadingHelper.showLoadFailed();
+        loadingHelper.showLoadFailed(failureMsg);
     }
 
 
