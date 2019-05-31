@@ -60,7 +60,7 @@ public abstract class BaseMvpActivity<T extends BasePresenter> extends BaseActiv
 
     @Override
     public void showLoadFailure(CharSequence failureMsg) {
-        loadingHelper.showLoadFailed();
+        loadingHelper.showLoadFailed(failureMsg);
     }
 
     @Override
