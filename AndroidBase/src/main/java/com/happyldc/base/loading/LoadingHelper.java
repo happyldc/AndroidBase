@@ -51,6 +51,11 @@ public class LoadingHelper {
         mHolder.showLoading();
     }
 
+    public void showLoading(CharSequence loadingMsg) {
+        mHolder.withData(loadingMsg);
+        showLoading();
+    }
+
     public void showLoadSuccess() {
         initLoadingStatusViewIfNeed();
         mHolder.showLoadSuccess();
@@ -62,9 +67,20 @@ public class LoadingHelper {
 
     }
 
+    public void showLoadFailed(CharSequence failureMsg) {
+        mHolder.withData(failureMsg);
+        showLoadFailed();
+
+    }
+
     public void showEmpty() {
         initLoadingStatusViewIfNeed();
         mHolder.showEmpty();
+    }
+    public void showEmpty(CharSequence emptyMsg) {
+        mHolder.withData(emptyMsg);
+        showEmpty();
+
     }
 
 }

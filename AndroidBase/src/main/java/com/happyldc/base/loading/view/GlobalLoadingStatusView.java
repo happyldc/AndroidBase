@@ -2,6 +2,7 @@ package com.happyldc.base.loading.view;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,34 +42,43 @@ public class GlobalLoadingStatusView extends LinearLayout implements View.OnClic
         mTextView.setVisibility(visible ? VISIBLE : GONE);
     }
 
-    public void setMsg(String msg) {
-        mTextView.setText(msg == null ? "" : msg);
-    }
 
-    public void setStatus(int status) {
+    public void setStatus(int status, CharSequence tipMsg) {
         boolean show = true;
         OnClickListener onClickListener = null;
         int image = R.drawable.loading;
-        int str = R.string.str_none;
+        CharSequence str = getResources().getString(R.string.str_none);
         switch (status) {
             case STATUS_LOAD_SUCCESS:
                 show = false;
                 break;
             case STATUS_LOADING:
-                str = R.string.loading;
+                if (TextUtils.isEmpty(tipMsg)) {
+                    str = getResources().getString(R.string.loading);
+                } else {
+                    str = tipMsg;
+                }
                 break;
             case STATUS_LOAD_FAILED:
-                str = R.string.load_failed;
+                str = getResources().getString(R.string.load_failed);
                 image = R.drawable.icon_failed;
-                boolean networkConn = NetWorkUtils.isNetWorkConnected();
-                if ( !networkConn) {
-                    str = R.string.load_failed_no_network;
-                    image = R.drawable.icon_no_wifi;
+                if (TextUtils.isEmpty(tipMsg)) {
+                    boolean networkConn = NetWorkUtils.isNetWorkConnected();
+                    if (!networkConn) {
+                        str = getResources().getString(R.string.load_failed_no_network);
+                        image = R.drawable.icon_no_wifi;
+                    }
+                } else {
+                    str = tipMsg;
                 }
                 onClickListener = this;
                 break;
             case STATUS_EMPTY_DATA:
-                str = R.string.empty;
+                if (TextUtils.isEmpty(tipMsg)) {
+                    str = getResources().getString(R.string.empty);
+                } else {
+                    str = tipMsg;
+                }
                 image = R.drawable.icon_empty;
                 break;
             default:
@@ -80,10 +90,17 @@ public class GlobalLoadingStatusView extends LinearLayout implements View.OnClic
         setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
+    public void setMsg(String msg) {
+        mTextView.setText(msg == null ? "" : msg);
+    }
+
+    public void setStatus(int status) {
+        setStatus(status, null);
+    }
+
     @Override
     public void onClick(View v) {
         if (mRetryTask != null) {
-
             mRetryTask.run();
         }
     }

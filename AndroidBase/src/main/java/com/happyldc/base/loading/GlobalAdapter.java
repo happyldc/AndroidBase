@@ -7,8 +7,9 @@ import com.happyldc.base.loading.view.GlobalLoadingStatusView;
 
 /**
  * demo to show how to create a {@link Gloading.Adapter}
- * @see GlobalLoadingStatusView
+ *
  * @author billy.qi
+ * @see GlobalLoadingStatusView
  * @since 19/3/18 18:37
  */
 public class GlobalAdapter implements Gloading.Adapter {
@@ -23,8 +24,15 @@ public class GlobalAdapter implements Gloading.Adapter {
         if (loadingStatusView == null) {
             loadingStatusView = new GlobalLoadingStatusView(holder.getContext(), holder.getRetryTask());
         }
-        loadingStatusView.setStatus(status);
+
         Object data = holder.getData();
+        if (data == null) {
+            loadingStatusView.setStatus(status);
+        } else {
+            loadingStatusView.setStatus(status, data.toString());
+        }
+
+
         //show or not show msg view
         boolean hideMsgView = Constants.HIDE_LOADING_STATUS_MSG.equals(data);
         loadingStatusView.setMsgViewVisibility(!hideMsgView);

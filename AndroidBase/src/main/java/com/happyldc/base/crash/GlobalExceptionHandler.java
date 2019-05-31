@@ -59,17 +59,34 @@ public class GlobalExceptionHandler implements Thread.UncaughtExceptionHandler {
 
     Thread.UncaughtExceptionHandler mDefaultHandler;
 
-    public void register(Context context) {
+    public GlobalExceptionHandler register(Context context) {
         this.mContext = context;
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         mCrashFileDirPath = context.getExternalCacheDir() + "/logs/";
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();
         Thread.setDefaultUncaughtExceptionHandler(this);
+        return this;
+    }
+
+    ExceptionIntercept intercept;
+
+    /**
+     * 设置异常捕获拦截
+     *
+     * @param intercept
+     */
+    public GlobalExceptionHandler setIntercept(ExceptionIntercept intercept) {
+        this.intercept = intercept;
+        return this;
     }
 
     @Override
     public void uncaughtException(Thread t, Throwable e) {
-
+        if (intercept != null) {
+            if (intercept.uncaughtException(t, e)) {
+                return;
+            }
+        }
         if (!handleException(t, e) && mDefaultHandler != null) {
             //如果用户没有处理则让系统默认的异常处理器来处
             mDefaultHandler.uncaughtException(t, e);
