@@ -25,15 +25,32 @@ public class ExceptionDetailActivity extends AppCompatActivity implements View.O
     private TextView mTvDetail;
     private String outputInfo;
     private Toolbar mToolbar;
-
+    String appName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exception_detail);
         initView();
-        outputInfo = getIntent().getStringExtra(GlobalExceptionHandler.CRASH_EXTRA_KEY_LOGCONTENT);
-        mToolbar.setTitle(getString(R.string.exception_detail_title, getIntent().getStringExtra(GlobalExceptionHandler.CRASH_EXTRA_KEY_APPNAME)));
+        if (getIntent() == null) {
+            finish();
+            return;
+        }
+        if (getIntent().hasExtra(GlobalExceptionHandler.CRASH_EXTRA_KEY_LOGCONTENT)) {
+            outputInfo = getIntent().getStringExtra(GlobalExceptionHandler.CRASH_EXTRA_KEY_LOGCONTENT);
+            if (outputInfo == null || outputInfo.length() <= 0) {
+                finish();
+                return;
+            }
+        }
+        if (getIntent().hasExtra(GlobalExceptionHandler.CRASH_EXTRA_KEY_APPNAME)) {
+            appName = getIntent().getStringExtra(GlobalExceptionHandler.CRASH_EXTRA_KEY_APPNAME);
+            if (appName == null || appName.length() <= 0) {
+                finish();
+                return;
+            }
+        }
+        mToolbar.setTitle(getString(R.string.exception_detail_title, appName));
 
         setSupportActionBar(mToolbar);
         mTvDetail.setText(outputInfo);

@@ -3,6 +3,7 @@ package com.happyldc.base.crash;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -38,11 +39,24 @@ public class ExceptionDialogActivity extends AppCompatActivity implements View.O
         setContentView(R.layout.activity_exception_dialog);
 
         initView();
-        String appName = getIntent().getStringExtra(CRASH_EXTRA_KEY_APPNAME);
-        if (appName == null || appName.length() <= 0) {
-            mTvMsg.setText("应用程序已停止运行");
-        } else {
-            mTvMsg.setText(appName + "已停止运行");
+        if (getIntent() == null) {
+            finish();
+            return;
+        }
+        if (getIntent().hasExtra(CRASH_EXTRA_KEY_APPNAME)) {
+            String appName = getIntent().getStringExtra(CRASH_EXTRA_KEY_APPNAME);
+            if (appName == null || appName.length() <= 0) {
+                mTvMsg.setText("应用程序已停止运行");
+            } else {
+                mTvMsg.setText(appName + "已停止运行");
+            }
+        }
+        if (getIntent().hasExtra(CRASH_EXTRA_KEY_LOGCONTENT)) {
+            String stringExtra = getIntent().getStringExtra(CRASH_EXTRA_KEY_LOGCONTENT);
+            if (TextUtils.isEmpty(stringExtra)) {
+                finish();
+                return;
+            }
         }
 
     }
