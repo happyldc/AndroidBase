@@ -1,10 +1,11 @@
 package com.happyldc.androidbasedemo;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -47,11 +48,12 @@ public class ListActivity extends BaseListActivity<UserEntity> {
         getData();
     }
 
+    @SuppressLint("HandlerLeak")
     Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            if (new Random().nextInt(10) > 7) {
+//            if (new Random().nextInt(10) > 8) {
                 for (int i = 0; i < 20; i++) {
                     UserEntity userEntity = new UserEntity();
                     userEntity.id = i + "0000";
@@ -60,9 +62,9 @@ public class ListActivity extends BaseListActivity<UserEntity> {
                 loadingHelper.showLoadSuccess();
                 setData(userList);
 
-            } else {
-                loadingHelper.showLoadFailed();
-            }
+//            } else {
+//                loadingHelper.showLoadFailed();
+//            }
         }
     };
     @Override

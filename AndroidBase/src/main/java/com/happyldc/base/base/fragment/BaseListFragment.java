@@ -1,10 +1,9 @@
 package com.happyldc.base.base.fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
-import android.widget.BaseAdapter;
 
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -12,7 +11,6 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.happyldc.base.R;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseListFragment<T> extends BaseFragment {

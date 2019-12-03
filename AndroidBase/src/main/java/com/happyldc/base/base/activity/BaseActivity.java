@@ -1,9 +1,9 @@
 package com.happyldc.base.base.activity;
 
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -30,7 +30,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         if (obj instanceof View) {
             setContentView((View) obj);
         } else if (obj instanceof Integer) {
-            setContentView((int) obj);
+           setContentView((int) obj);
         } else {
             throw new IllegalArgumentException("getContentViewLayoutOrLayoutId Only view or layoutId can be returned.");
         }
